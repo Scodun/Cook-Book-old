@@ -33,7 +33,9 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "@babel/plugin-proposal-class-properties": "^7.10.4",
         "antd": "^4.5.3",
-        "eslint": "^7.6.0"
+        "eslint": "^7.6.0",
+        "react-router-dom": "^5.2.0"
     }
 }

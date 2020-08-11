@@ -20,7 +20,8 @@
         return translation;
     }
 </script>
-<div id="welcome"></div>
+    <div id="index"></div>
+
 <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
