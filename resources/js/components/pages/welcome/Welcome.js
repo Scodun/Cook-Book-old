@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Typography } from "antd";
 import "antd/dist/antd.css";
 import Login from "./components/Login";
-import CustomFooter from "../../structure/CustomFooter";
 
 const { Title } = Typography;
 
@@ -32,10 +31,10 @@ function Welcome() {
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-lg-8 text-left">
-                           Here come some Screenshot
+
                         </div>
                         <div className="col-lg-4">
-                           Here come some desc
+
                         </div>
                     </div>
                 </div>

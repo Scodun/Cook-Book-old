@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Welcome from "./components/pages/welcome/Welcome";
-import Legal from "./components/structure/Legal";
+import Legal from "./components/pages/Impressum/Legal";
 
 
 class Routes extends React.Component {
