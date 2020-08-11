@@ -7,7 +7,7 @@ class CookieMessage extends React.Component {
             this.props.history.push('/legal');
     }
     componentDidMount() {
-            const key = `open${Date.now()}`;
+            const key = `openCookie`;
             const btn = (
                 <div>
                     <Button type="primary" size="small" className="mr-1" onClick={() => notification.close(key) }>
