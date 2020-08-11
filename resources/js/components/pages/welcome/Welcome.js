@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Typography } from "antd";
 import "antd/dist/antd.css";
 import Login from "./components/Login";
+import CookieMessage from "../../molecules/CookieMessage";
 
 const { Title } = Typography;
 
@@ -39,6 +40,7 @@ function Welcome() {
                     </div>
                 </div>
             </section>
+            <CookieMessage/>
         </div>
     );
 }
