@@ -5,7 +5,7 @@ import {
     BrowserRouter as Router,
 } from "react-router-dom";
 import { ScrollToTop } from "./components/atoms";
-import CustomFooter from "./components/molecules/Footer";
+import { CustomFooter } from "./components/molecules";
 import Routes from "./Routes";
 
 

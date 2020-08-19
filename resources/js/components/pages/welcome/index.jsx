@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Typography } from "antd";
 import "antd/dist/antd.css";
-import Login from "./components/Login";
+import { Login } from "../../molecules";
 import CookieMessage from "../../molecules/CookieMessage";
 
 const { Title } = Typography;
 
-function Welcome() {
+function Index() {
     return (
         <div className="welcomePage">
             <section className="top">
@@ -45,4 +45,4 @@ function Welcome() {
     );
 }
 
-export default Welcome;
+export default Index;

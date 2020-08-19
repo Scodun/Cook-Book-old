@@ -1,4 +1,6 @@
-import Footer from "./Footer";
+import CustomFooter from "./Footer";
 import Navbar from "./Navbar";
+import CookieMessage from "./CookieMessage";
+import Login from "./Login";
 
-export { Footer, Navbar };
+export { CustomFooter, Navbar, CookieMessage, Login };

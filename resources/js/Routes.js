@@ -1,8 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import Welcome from "./components/pages/welcome/Welcome";
-import Legal from "./components/pages/Impressum/Legal";
+import {Welcome, Impressum} from "./components/pages";
 
 
 class Routes extends React.Component {
@@ -10,7 +9,7 @@ class Routes extends React.Component {
         return (
             <Switch>
                 <Route exact path="/" component={Welcome} />
-                <Route exact path="/Legal" component={Legal} />
+                <Route exact path="/Legal" component={Impressum} />
                 <Route
                     render={function () {
                         return <h1>Not Found</h1>;
