@@ -16,7 +16,7 @@ npm install
 While working on the Project manually building takes too long use these commands to auto sync and build code.
 ```bash
 php artisan serve
-npm watch
+npm run watch
 ```
 
 
