@@ -4,12 +4,20 @@ import {
 } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const { TabPane } = Tabs;
 
 class Login extends React.Component {
   onFinish (values) {
     console.log("Received values of form: ", values);
+  }
+
+  onRegFinish (values) {
+    axios.post("register", values).then(res => {
+      console.log(res);
+      console.log(res.data);
+    });
   }
 
   render () {
@@ -72,7 +80,7 @@ class Login extends React.Component {
               initialValues={{
                 remember: true
               }}
-              onFinish={this.onFinish}
+              onFinish={this.onRegFinish}
             >
               <Form.Item
                 name="email"
