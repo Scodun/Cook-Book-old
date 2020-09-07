@@ -14,8 +14,8 @@ class CreateIngredientsTable extends Migration
     public function up()
     {
         Schema::create('ingredients', function (Blueprint $table) {
-            $table->string('id',32)->primary();
-            $table->string('user_id',32)->nullable(false);
+            $table->uuid('id')->primary();
+            $table->uuid('user_id')->nullable(false);
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('name')->nullable(false);
 

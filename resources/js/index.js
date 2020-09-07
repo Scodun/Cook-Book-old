@@ -10,7 +10,6 @@ function Index () {
     <Router>
       <ScrollToTop>
         <div className="flyout">
-
           <main>
             <Routes />
           </main>

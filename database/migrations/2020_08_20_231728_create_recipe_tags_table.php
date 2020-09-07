@@ -14,8 +14,8 @@ class CreateRecipeTagsTable extends Migration
     public function up()
     {
         Schema::create('recipe_tags', function (Blueprint $table) {
-            $table->char('recipe_id',32);
-            $table->char('tag_id',32);
+            $table->uuid('recipe_id');
+            $table->uuid('tag_id');
             $table->primary(["recipe_id","tag_id"]);
             $table->foreign('recipe_id')->references('id')->on('recipes');
             $table->foreign('tag_id')->references('id')->on('tags');

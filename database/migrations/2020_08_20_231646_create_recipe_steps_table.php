@@ -14,7 +14,7 @@ class CreateRecipeStepsTable extends Migration
     public function up()
     {
         Schema::create('recipe_steps', function (Blueprint $table) {
-            $table->char('recipe_id',32)->nullable(false);
+            $table->uuid('recipe_id')->nullable(false);
             $table->foreign('recipe_id')->references('id')->on('recipes');
             $table->integer("step");
             $table->primary(["recipe_id","step"]);

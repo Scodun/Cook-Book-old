@@ -14,9 +14,9 @@ class CreateIngredientsRecipeAmountsTable extends Migration
     public function up()
     {
         Schema::create('ingredients_recipe_amounts', function (Blueprint $table) {
-            $table->char('recipe_id',32)->nullable(false);
+            $table->uuid('recipe_id')->nullable(false);
             $table->foreign('recipe_id')->references('id')->on('recipes');
-            $table->char('ingredient_id',32)->nullable(false);
+            $table->uuid('ingredient_id')->nullable(false);
             $table->foreign('ingredient_id')->references('id')->on('ingredients');
             $table->primary(["ingredient_id","recipe_id"]);
 

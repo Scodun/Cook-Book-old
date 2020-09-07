@@ -14,8 +14,8 @@ class CreateRecipeImagesTable extends Migration
     public function up()
     {
         Schema::create('recipe_images', function (Blueprint $table) {
-            $table->char('id',32)->primary();
-            $table->char('recipe_id',32)->nullable(false);
+            $table->uuid('id')->primary();
+            $table->uuid('recipe_id')->nullable(false);
             $table->foreign('recipe_id')->references('id')->on('recipes');
             $table->string("image");
 

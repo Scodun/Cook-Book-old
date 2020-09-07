@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +15,5 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome')->name('welcome');;
 Route::view('/Legal', 'welcome');
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::view('/{path?}', 'welcome')->middleware('auth:api');

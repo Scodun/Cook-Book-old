@@ -1,3 +1,4 @@
 import ScrollToTop from "./ScrollToTop";
+import { AuthenticatedRoute } from "./AuthenticatedRoute";
 
-export { ScrollToTop };
+export { ScrollToTop, AuthenticatedRoute };
