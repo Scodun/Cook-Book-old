@@ -1,5 +1,5 @@
 import { Layout, Menu } from "antd";
-import { ReadOutlined, UserOutlined } from "@ant-design/icons";
+import { ReadOutlined, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 import React from "react";
 import { CustomFooter } from "../../molecules";
@@ -9,6 +9,16 @@ const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
 class AuthLayout extends React.Component {
+    state = {
+      collapsed: false
+    };
+
+    toggle = () => {
+      this.setState({
+        collapsed: !this.state.collapsed
+      });
+    };
+
     handleClick = e => {
       switch (e.key) {
         case "logout":
@@ -32,12 +42,20 @@ class AuthLayout extends React.Component {
       return (
         <Layout style={{ height: "100vh" }}>
           <Header className="header">
-            <div className="logo" >
-          Cook Book
+            <div className="test123">
+              <div className="collapse-icon">
+                {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                  className: "trigger",
+                  onClick: this.toggle
+                })}
+              </div>
+              <div className="logo" >
+                      Cook Book
+              </div>
             </div>
           </Header>
           <Layout>
-            <Sider width={200} className="site-layout-background">
+            <Sider width={200} trigger={null} collapsible collapsed={this.state.collapsed} className="site-layout-background">
               <Menu
                 mode="inline"
                 onClick={this.handleClick}
