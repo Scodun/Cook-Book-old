@@ -1,5 +1,5 @@
 import { Layout, Menu } from "antd";
-import { ReadOutlined, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import { ReadOutlined, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined, HomeOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 import React from "react";
 import { CustomFooter } from "../../molecules";
@@ -25,7 +25,8 @@ class AuthLayout extends React.Component {
           Cookies.remove("access_token");
           this.props.history.push("/");
           break;
-        case 2:
+        case "home":
+          this.props.history.push("/home");
           break;
         case 3:
           break;
@@ -59,19 +60,20 @@ class AuthLayout extends React.Component {
               <Menu
                 mode="inline"
                 onClick={this.handleClick}
-                defaultSelectedKeys={["1"]}
-                defaultOpenKeys={["sub1"]}
+                defaultSelectedKeys={["home"]}
+                defaultOpenKeys={["recipes"]}
                 style={{ height: "100%", borderRight: 0 }}
               >
-                <SubMenu key="sub1" icon={<UserOutlined />} title="Profil">
-                  <Menu.Item key="1">Meine Freunde</Menu.Item>
-                  <Menu.Item key="2">Einstellungen</Menu.Item>
-                  <Menu.Item key="logout">Logout</Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub2" icon={<ReadOutlined />} title="Rezepte">
+                <Menu.Item key="home" icon={<HomeOutlined />} title="Home">Home</Menu.Item>
+                <SubMenu key="recipes" icon={<ReadOutlined />} title="Rezepte">
                   <Menu.Item key="4">Meine Rezepte</Menu.Item>
                   <Menu.Item key="5">Alle Rezepte</Menu.Item>
                   <Menu.Item key="6">Zufallsrezept</Menu.Item>
+                </SubMenu>
+                <SubMenu key="profile" icon={<UserOutlined />} title="Profil">
+                  <Menu.Item key="1">Meine Freunde</Menu.Item>
+                  <Menu.Item key="2">Einstellungen</Menu.Item>
+                  <Menu.Item key="logout">Logout</Menu.Item>
                 </SubMenu>
               </Menu>
             </Sider>
