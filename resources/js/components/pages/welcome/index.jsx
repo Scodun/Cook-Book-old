@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography } from "antd";
-import "antd/dist/antd.css";
 import { Login } from "../../molecules";
 import CookieMessage from "../../molecules/CookieMessage";
 
