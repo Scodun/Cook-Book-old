@@ -1,0 +1,10 @@
+.home{
+    display: flex;
+    justify-content: space-between;
+    .recipesContainer{
+        width: 30%;
+    }
+    .mainContainer{
+        width: 70%;
+    }
+}

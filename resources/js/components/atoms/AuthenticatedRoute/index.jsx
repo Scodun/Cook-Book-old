@@ -3,6 +3,7 @@ import { Route, Redirect, useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 export const getAccessToken = () => Cookies.get("access_token");
+export const getUser = async () => await axios.get("/api/auth/user");
 export const isAuthenticated = () => !!getAccessToken();
 export const history = () => useHistory();
 const redirectToLogin = () => {
@@ -12,7 +13,7 @@ export const authenticate = async () => {
   if (getAccessToken()) {
     try {
       // eslint-disable-next-line no-undef
-      const res = await axios.get("/api/auth/user", { headers: { "X-CSRF-TOKEN": csrf_token, "Content-Type": "application/json", Authorization: `Bearer ${getAccessToken()}` } });
+      const res = await axios.get("/api/auth/user");
       console.log(res);
       return true;
     } catch (error) {

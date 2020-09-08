@@ -18,6 +18,9 @@ function Login () {
       const expires = (res.data.expires_at || 60 * 60) * 1000;
       const inOneHour = new Date(new Date().getTime() + expires);
       Cookies.set("access_token", res.data.access_token, { expires: inOneHour });
+      axios.defaults.headers.common.Authorization = "Bearer " + res.data.access_token;
+      // eslint-disable-next-line no-undef,camelcase
+      axios.defaults.headers.common["X-CSRF-TOKEN"] = csrf_token;
       history.push("/home");
     });
   };
