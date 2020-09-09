@@ -45,7 +45,7 @@ class AuthLayout extends React.Component {
       return (
         <Layout style={{ height: "100vh" }}>
           <Header className="header">
-            <div className="test123">
+            <div className="head-items">
               <div className="collapse-icon">
                 {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                   className: "trigger",
@@ -58,7 +58,7 @@ class AuthLayout extends React.Component {
             </div>
           </Header>
           <Layout>
-            <Sider width={200} trigger={null} collapsible collapsed={this.state.collapsed} className="site-layout-background">
+            <Sider width={200} trigger={null} collapsible collapsed={this.state.collapsed} breakpoint="lg" collapsedWidth="0" className="site-layout-background">
               <Menu
                 mode="inline"
                 onClick={this.handleClick}

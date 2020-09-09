@@ -2,7 +2,7 @@
     background-color: $primary!important;
     border-bottom: lightblue 5px solid;
     padding-left: unset!important;
-    .test123{
+    .head-items{
         display: flex;
         .collapse-icon{
             font-size: 1rem;
@@ -19,3 +19,7 @@
         }
     }
 }
+.ant-layout{
+    min-height: unset!important;
+}
+

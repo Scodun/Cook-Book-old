@@ -1,10 +1,9 @@
 .home{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     .recipesContainer{
-        width: 30%;
     }
     .mainContainer{
-        width: 70%;
     }
 }
