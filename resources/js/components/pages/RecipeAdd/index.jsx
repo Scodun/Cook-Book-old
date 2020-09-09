@@ -3,6 +3,7 @@ import { getUser } from "../../atoms/AuthenticatedRoute";
 import { Form, Input, Button, Rate, Card } from "antd";
 import { PictureWall } from "../../atoms";
 import { IngredientInputList, StepInputList } from "../../molecules";
+import axios from "axios";
 
 class RecipeAdd extends Component {
   constructor (props) {
@@ -18,7 +19,10 @@ class RecipeAdd extends Component {
   }
 
     onFinish = values => {
-      console.log("Received values of form: ", values);
+      console.log(values.recipe);
+      axios.post("/api/recipe/create", values.recipe).then(res => {
+        console.log(res);
+      });
     };
 
     render () {
@@ -48,11 +52,13 @@ class RecipeAdd extends Component {
                   </div>
                 </section>
                 <section className="form-right">
-                  <Card title="Schwierigkeit" >
-                    <Rate/>
-                  </Card>
                   <label>Rezept Bilder</label>
                   <PictureWall></PictureWall>
+                  <Card title="Schwierigkeit" style={{ width: "20rem" }}>
+                    <Form.Item name={["recipe", "difficulty"]}>
+                      <Rate/>
+                    </Form.Item>
+                  </Card>
                 </section>
               </div>
 

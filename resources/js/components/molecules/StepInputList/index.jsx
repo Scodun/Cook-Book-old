@@ -54,20 +54,18 @@ render () {
                     {...field}
                     name={[field.name, "title"]}
                     fieldKey={[field.fieldKey, "title"]}
-                    rules={[{ required: true, message: "Fehlender Titel" }]}
                     style={{ width: "40rem" }}
+                    label="Schritt Titel"
                   >
-                    <label>Schritt Titel</label>
                     <Input placeholder="Title" style={{ width: "40rem" }}/>
                   </Form.Item>
                   <Form.Item
                     {...field}
                     name={[field.name, "text"]}
                     fieldKey={[field.fieldKey, "text"]}
-                    rules={[{ required: true, message: "Fehlender Text" }]}
                     className="stepInput"
+                    label="Schritt Beschreibung"
                   >
-                    <label>Schritt Beschreibung</label>
                     <Input.TextArea className="stepInput" />
                   </Form.Item>
                   <MinusCircleOutlined

@@ -12,9 +12,7 @@ trait IdTrait
     public static function bootIdTrait()
     {
         static::creating(function (Model $model) {
-            if (!$model->id) {
                 $model->id = Uuid::uuid1();
-            }
         });
     }
 

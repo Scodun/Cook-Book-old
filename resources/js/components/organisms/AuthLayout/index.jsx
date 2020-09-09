@@ -30,7 +30,8 @@ class AuthLayout extends React.Component {
         case "/home":
           this.props.history.push("/home");
           break;
-        case 3:
+        case "/recipes/view":
+          this.props.history.push("/recipes/view");
           break;
         case 4:
           break;
@@ -68,7 +69,7 @@ class AuthLayout extends React.Component {
               >
                 <Menu.Item key="/home" icon={<HomeOutlined />} title="Home">Home</Menu.Item>
                 <SubMenu key="recipes" icon={<ReadOutlined />} title="Rezepte">
-                  <Menu.Item key="/recipes/add">Meine Rezepte</Menu.Item>
+                  <Menu.Item key="/recipes/view">Meine Rezepte</Menu.Item>
                   <Menu.Item key="5">Alle Rezepte</Menu.Item>
                   <Menu.Item key="6">Zufallsrezept</Menu.Item>
                 </SubMenu>
@@ -83,7 +84,7 @@ class AuthLayout extends React.Component {
               <Content
                 className="site-layout-background"
                 style={{
-                  padding: 24,
+                  paddingTop: 24,
                   margin: 0,
                   height: "100%"
                 }}

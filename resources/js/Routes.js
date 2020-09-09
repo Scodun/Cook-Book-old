@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { Welcome, Impressum, Home, RecipeAdd } from "./components/pages";
+import { Welcome, Impressum, Home, RecipeAdd,RecipeView } from "./components/pages";
 import { AuthenticatedRoute } from "./components/atoms";
 import AuthLayout from "./components/organisms/AuthLayout";
 
@@ -12,6 +12,7 @@ class Routes extends React.Component {
           <Switch>
             <AuthenticatedRoute exact path="/home" component={Home}/>
             <AuthenticatedRoute exact path="/recipes/add" component={RecipeAdd}/>
+            <AuthenticatedRoute exact path="/recipes/view" component={RecipeView}/>
           </Switch>
         </AuthLayout>
       );

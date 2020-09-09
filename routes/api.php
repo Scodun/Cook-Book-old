@@ -26,3 +26,10 @@ Route::group([
         Route::get('user', 'HomeController@getAuth');
     });
 });
+
+Route::group([
+    'middleware' => 'auth:api'
+], function() {
+    Route::post('recipe/create', 'RecipeController@create');
+    Route::get('recipes/getForUser', 'RecipeController@getAllForUser');
+});

@@ -15,9 +15,12 @@ class CreateIngredientsTable extends Migration
     {
         Schema::create('ingredients', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id')->nullable(false);
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->string('name')->nullable(false);
+            $table->uuid('recipe_id')->nullable(false);
+            $table->foreign('recipe_id')->references('id')->on('recipes');
+
+            $table->string('ingredient_name')->nullable(false);
+            $table->string("amount");
+            $table->string("unit")->nullable();
 
             $table->timestamps();
             $table->softDeletes();
