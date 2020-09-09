@@ -4,7 +4,14 @@ import Cookies from "js-cookie";
 import axios from "axios";
 export const getAccessToken = () => Cookies.get("access_token");
 export const getUser = async () => await axios.get("/api/auth/user");
-export const isAuthenticated = () => !!getAccessToken();
+export const isAuthenticated = () => {
+  if (getAccessToken()) {
+    axios.defaults.headers.common.Authorization = "Bearer " + getAccessToken();
+    // eslint-disable-next-line no-undef,camelcase
+    axios.defaults.headers.common["X-CSRF-TOKEN"] = csrf_token;
+  }
+  return !!getAccessToken();
+};
 export const history = () => useHistory();
 const redirectToLogin = () => {
   history.push("/");
