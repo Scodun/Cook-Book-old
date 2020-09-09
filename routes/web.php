@@ -17,3 +17,4 @@ Route::view('/Legal', 'welcome');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/recipes/add', 'HomeController@index')->name('recipesAdd');

@@ -1,6 +1,7 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
+/* The emerging W3C standard
+   that is currently Firefox-only */
 // Variables
 @import 'variables';
 
@@ -9,4 +10,21 @@
 
 @import 'styles/welcome';
 @import 'styles/home';
+@import 'styles/recipes';
 @import 'styles/layouts/authLayout';
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: $primary white;
+}
+
+/* Works on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+    width: 12px;
+}
+*::-webkit-scrollbar-track {
+}
+*::-webkit-scrollbar-thumb {
+    background-color: $primary;
+    border-radius: 20px;
+}

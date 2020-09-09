@@ -1,0 +1,44 @@
+.recipeAdd{
+    label{
+        font-size : 20px!important;
+        //YOUR CUSTOM STYLE
+    }
+    .form-ingredients-top-wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .form-left{
+        width: 100%;
+        min-width: 30%;
+    }
+    .form-right{
+        width: 100%;
+    }
+    .ingredient-list{
+        max-height: 25rem;
+        width: 100%;
+        padding-right: 5%;
+        overflow: auto;
+    }
+    .form-ingredients-wrapper{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .form-steps-wrapper{
+        padding-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        width: 100%;
+    }
+    .form-steps-inputs{
+        padding-left: 1rem;
+    }
+    .stepInput{
+        width: 40rem!important;
+        height: 10rem!important;
+    }
+}

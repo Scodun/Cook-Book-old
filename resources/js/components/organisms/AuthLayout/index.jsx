@@ -27,7 +27,7 @@ class AuthLayout extends React.Component {
           axios.defaults.headers.common.Authorization = null;
           this.props.history.push("/");
           break;
-        case "home":
+        case "/home":
           this.props.history.push("/home");
           break;
         case 3:
@@ -62,13 +62,13 @@ class AuthLayout extends React.Component {
               <Menu
                 mode="inline"
                 onClick={this.handleClick}
-                defaultSelectedKeys={["home"]}
+                selectedKeys={[this.props.location.pathname]}
                 defaultOpenKeys={["recipes"]}
                 style={{ height: "100%", borderRight: 0 }}
               >
-                <Menu.Item key="home" icon={<HomeOutlined />} title="Home">Home</Menu.Item>
+                <Menu.Item key="/home" icon={<HomeOutlined />} title="Home">Home</Menu.Item>
                 <SubMenu key="recipes" icon={<ReadOutlined />} title="Rezepte">
-                  <Menu.Item key="4">Meine Rezepte</Menu.Item>
+                  <Menu.Item key="/recipes/add">Meine Rezepte</Menu.Item>
                   <Menu.Item key="5">Alle Rezepte</Menu.Item>
                   <Menu.Item key="6">Zufallsrezept</Menu.Item>
                 </SubMenu>
