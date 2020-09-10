@@ -1,6 +1,7 @@
 import { Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import React from "react";
+import Cookies from "js-cookie";
 
 function getBase64 (file) {
   return new Promise((resolve, reject) => {
@@ -46,7 +47,8 @@ class PictureWall extends React.Component {
       return (
         <>
           <Upload
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            action="/api/RecipeImage/add"
+            headers={{ authorization: "Bearer " + Cookies.get("access_token") }}
             listType="picture-card"
             fileList={fileList}
             onPreview={this.handlePreview}

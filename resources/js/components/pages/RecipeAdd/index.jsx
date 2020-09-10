@@ -8,6 +8,7 @@ import axios from "axios";
 class RecipeAdd extends Component {
   constructor (props) {
     super(props);
+    this.Pictures = React.createRef();
     this.state = {
       user: null
     };
@@ -19,7 +20,8 @@ class RecipeAdd extends Component {
   }
 
     onFinish = values => {
-      console.log(values.recipe);
+      const currentPictures = this.Pictures.current;
+      console.log(currentPictures.state.fileList);
       axios.post("/api/recipe/create", values.recipe).then(res => {
         console.log(res);
       });
@@ -53,7 +55,7 @@ class RecipeAdd extends Component {
                 </section>
                 <section className="form-right">
                   <label>Rezept Bilder</label>
-                  <PictureWall></PictureWall>
+                  <PictureWall ref={this.Pictures}></PictureWall>
                   <Card title="Schwierigkeit" style={{ width: "20rem" }}>
                     <Form.Item name={["recipe", "difficulty"]}>
                       <Rate/>

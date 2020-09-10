@@ -40,4 +40,8 @@ class Recipe extends Model
     {
         return $this->hasMany(Ingredient::class);
     }
+    public function RecipeImages()
+    {
+        return $this->hasMany(RecipeImage::class);
+    }
 }

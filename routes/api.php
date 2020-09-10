@@ -32,4 +32,5 @@ Route::group([
 ], function() {
     Route::post('recipe/create', 'RecipeController@create');
     Route::get('recipes/getForUser', 'RecipeController@getAllForUser');
+    Route::post('RecipeImage/add', 'RecipeController@imageAdd');
 });

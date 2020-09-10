@@ -28,6 +28,12 @@ class RecipeController extends Controller
         return User::findById(Auth::user()->id)->recipes;
     }
 
+    public function imageAdd(Request $request){
+        $filename = time().'.'.$request->file->getClientOriginalExtension();
+        $request->file->move(public_path('images'), $filename);
+        return $filename;
+    }
+
     public function create(Request $request){
         $data = $request->all();
         /* @var $recipe \App\Models\Recipe */
