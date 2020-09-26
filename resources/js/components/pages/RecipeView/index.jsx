@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Card } from "antd";
-import axios from "axios";
+import { axios } from "../../atoms";
 import { EditOutlined, ShareAltOutlined } from "@ant-design/icons";
 const { Meta } = Card;
 

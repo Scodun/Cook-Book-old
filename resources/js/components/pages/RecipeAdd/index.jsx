@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { getUser } from "../../atoms/AuthenticatedRoute";
 import { Form, Input, Button, Rate, Card } from "antd";
-import { PictureWall } from "../../atoms";
+import { PictureWall, axios } from "../../atoms";
 import { IngredientInputList, StepInputList } from "../../molecules";
-import axios from "axios";
 
 class RecipeAdd extends Component {
   constructor (props) {

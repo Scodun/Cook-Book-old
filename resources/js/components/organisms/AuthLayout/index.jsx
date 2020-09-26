@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 import React from "react";
 import { CustomFooter } from "../../molecules";
 import Cookies from "js-cookie";
-import axios from "axios";
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -24,7 +23,6 @@ class AuthLayout extends React.Component {
       switch (e.key) {
         case "logout":
           Cookies.remove("access_token");
-          axios.defaults.headers.common.Authorization = null;
           this.props.history.push("/");
           break;
         case "/home":

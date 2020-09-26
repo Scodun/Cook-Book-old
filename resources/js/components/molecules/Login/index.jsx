@@ -5,8 +5,8 @@ import {
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Link, useHistory } from "react-router-dom";
 
-import axios from "axios";
 import Cookies from "js-cookie";
+import {axios} from "../../atoms";
 
 const { TabPane } = Tabs;
 
@@ -14,23 +14,19 @@ function Login () {
   const history = useHistory();
   const onLoginFinish = function (values) {
     // eslint-disable-next-line no-undef
-    axios.post("/api/auth/login", values, { headers: { "X-CSRF-TOKEN": csrf_token, "Content-Type": "application/json" } }).then(res => {
+      axios.post("/api/auth/login", values, { headers: { "X-CSRF-TOKEN": csrf_token, "Content-Type": "application/json" } }).then(res => {
       const expires = (res.data.expires_at || 60 * 60) * 1000;
       const inOneHour = new Date(new Date().getTime() + expires);
       Cookies.set("access_token", res.data.access_token, { expires: inOneHour });
-      axios.defaults.headers.common.Authorization = "Bearer " + res.data.access_token;
-      // eslint-disable-next-line no-undef,camelcase
-      axios.defaults.headers.common["X-CSRF-TOKEN"] = csrf_token;
+
       history.push("/home");
     });
   };
 
   const onRegFinish = function (values) {
-    console.log(values);
     // eslint-disable-next-line no-undef
-    axios.post("/api/auth/register", values, { headers: { "X-CSRF-TOKEN": csrf_token } }).then(res => {
-      console.log(res);
-      console.log(res.data);
+      axios.post("/api/auth/register", values, { headers: { "X-CSRF-TOKEN": csrf_token } }).then(res => {
+
     });
   };
 

@@ -2,7 +2,6 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 let axiosInstance = axios.create({
-    baseURL: `https://localhost:5001`,
     headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -16,6 +15,8 @@ axiosInstance.interceptors.request.use(
         if (token) {
             config.headers.common["Authorization"] = `Bearer ${token}`;
         }
+        // eslint-disable-next-line no-undef,camelcase
+        config.headers.common["X-CSRF-TOKEN"] = csrf_token;
 
         return config;
     },
