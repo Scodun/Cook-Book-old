@@ -8,8 +8,7 @@ const { Footer } = Layout;
 function CustomFooter () {
   return (
     <Footer style={{ textAlign: "center" }}>
-      Cook Book ©2020 Created by Raphael Burgstaller -
-      {" "}
+      { trans("general.footer") + " "}
       <Link to="/Legal">Legal</Link>
     </Footer>
   );

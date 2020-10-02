@@ -12,6 +12,8 @@ return [
     |
     */
     'confirm'=>'Confirm',
+    'information'=>'information',
+    'footer'=>"Cook Book ©2020 Created by Raphael Burgstaller -",
     'cookie_message'=>'By using our website you agree to the usage of Cookies.',
     'impressum' => '<h1 class="adsimple-121389847">Impressum</h1>
 <p class="adsimple-121389847">Informationspflicht laut §5 E-Commerce Gesetz, §14 Unternehmensgesetzbuch, §63 Gewerbeordnung und Offenlegungspflicht laut §25 Mediengesetz.</p>

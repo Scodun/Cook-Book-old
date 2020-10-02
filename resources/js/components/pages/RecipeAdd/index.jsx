@@ -41,21 +41,21 @@ class RecipeAdd extends Component {
             <div className="form-ingredients-wrapper">
               <div className="form-ingredients-top-wrapper">
                 <section className="form-left">
-                  <Form.Item name={["recipe", "name"]} label="Rezept Name">
-                    <Input placeholder="Bitte geben Sie den Namen des Rezeptes ein" />
+                  <Form.Item name={["recipe", "name"]} label={trans("crud.recipe_name")}>
+                    <Input placeholder={trans("crud.err_recipe_name")} />
                   </Form.Item>
-                  <Form.Item name={["recipe", "description"]} label="Beschreibung">
+                  <Form.Item name={["recipe", "description"]} label={trans("crud.description")}>
                     <Input.TextArea />
                   </Form.Item>
                   <div className="ingredient-list">
-                    <label>Zutaten</label>
+                    <label>{trans("crud.ingredients")}</label>
                     <IngredientInputList/>
                   </div>
                 </section>
                 <section className="form-right">
-                  <label>Rezept Bilder</label>
+                  <label>{trans("crud.recipe_images")}</label>
                   <PictureWall ref={this.Pictures}></PictureWall>
-                  <Card title="Schwierigkeit" style={{ width: "20rem" }}>
+                  <Card title={trans("crud.difficulty")} style={{ width: "20rem" }}>
                     <Form.Item name={["recipe", "difficulty"]}>
                       <Rate/>
                     </Form.Item>
@@ -69,7 +69,7 @@ class RecipeAdd extends Component {
             </div>
             <Form.Item>
               <Button type="primary" htmlType="submit">
-                      Submit
+                {trans("crud.save")}
               </Button>
             </Form.Item>
           </Form>
