@@ -26,15 +26,15 @@ class Home extends Component {
         <div className="home">
           <section className="mainContainer">
             <div className="welcome">
-              <h1>Willkommen {this.state.user ? this.state.user.username : ""}!</h1>
+              <h1>{trans("welcome.welcome") + " " + this.state.user ? this.state.user.username : ""}!</h1>
               <div className="tip-container">
                 <Card style={{ width: "20rem", margin: "1rem" }}
                   actions={[
                     <ArrowRightOutlined key="createRecipe" onClick={this.handleAddRecipeClick}/>
                   ]}>
                   <Meta
-                    title="Neues Rezept erstellen!"
-                    description="Erstelle ein neues Rezept um es mit Leuten zu teilen oder um es einfach für später zu speichern!"
+                    title={trans("crud.add_recipe")}
+                    description={trans("crud.add_recipe_desc")}
                   />
                 </Card>
                 <Card style={{ width: "20rem", margin: "1rem" }}
@@ -42,8 +42,8 @@ class Home extends Component {
                     <ArrowRightOutlined key="find" />
                   ]}>
                   <Meta
-                    title="Neue Freunde finden!"
-                    description="Suche neue Freunde um mit ihnen Rezepte auszutauschen!"
+                    title={trans("crud.find_friends")}
+                    description={trans("crud.find_friends_desc")}
                   />
                 </Card>
               </div>

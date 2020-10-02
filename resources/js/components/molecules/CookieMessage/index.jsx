@@ -12,7 +12,7 @@ class CookieMessage extends React.Component {
         </Button>
 
         <Button type="primary" size="small" onClick={this.onClickRedirect}>
-          Cookie Info
+          {trans("general.information")}
         </Button>
       </div>
     );

@@ -6,7 +6,7 @@ import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Link, useHistory } from "react-router-dom";
 
 import Cookies from "js-cookie";
-import {axios} from "../../atoms";
+import { axios } from "../../atoms";
 
 const { TabPane } = Tabs;
 
@@ -14,7 +14,7 @@ function Login () {
   const history = useHistory();
   const onLoginFinish = function (values) {
     // eslint-disable-next-line no-undef
-      axios.post("/api/auth/login", values, { headers: { "X-CSRF-TOKEN": csrf_token, "Content-Type": "application/json" } }).then(res => {
+    axios.post("/api/auth/login", values, { headers: { "X-CSRF-TOKEN": csrf_token, "Content-Type": "application/json" } }).then(res => {
       const expires = (res.data.expires_at || 60 * 60) * 1000;
       const inOneHour = new Date(new Date().getTime() + expires);
       Cookies.set("access_token", res.data.access_token, { expires: inOneHour });
@@ -25,7 +25,7 @@ function Login () {
 
   const onRegFinish = function (values) {
     // eslint-disable-next-line no-undef
-      axios.post("/api/auth/register", values, { headers: { "X-CSRF-TOKEN": csrf_token } }).then(res => {
+    axios.post("/api/auth/register", values, { headers: { "X-CSRF-TOKEN": csrf_token } }).then(res => {
 
     });
   };
@@ -47,37 +47,37 @@ function Login () {
               rules={[
                 {
                   required: true,
-                  message: "Please input your Username!"
+                  message: trans("auth.err_missing_username")
                 }
               ]}
             >
-              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder={trans("auth.username")} />
             </Form.Item>
             <Form.Item
               name="password"
               rules={[
                 {
                   required: true,
-                  message: "Please input your Password!"
+                  message: trans("auth.err_missing_password")
                 }
               ]}
             >
               <Input
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
-                placeholder="Password"
+                placeholder={trans("auth.password")}
               />
             </Form.Item>
             <Form.Item>
               <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
+                <Checkbox>{trans("auth.remember_me")}</Checkbox>
               </Form.Item>
-              <Link to="/PasswordReset">Forgot Password</Link>
+              <Link to="/PasswordReset">{trans("auth.forgot_password")}</Link>
             </Form.Item>
 
             <Form.Item>
               <Button type="primary" htmlType="submit" className="login-form-button">
-                  Log in
+                {trans("auth.login")}
               </Button>
             </Form.Item>
           </Form>
@@ -96,36 +96,36 @@ function Login () {
               rules={[
                 {
                   required: true,
-                  message: "Please input your Email!"
+                  message: trans("auth.err_missing_email")
                 }
               ]}
             >
-              <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
+              <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder={trans("auth.email")} />
             </Form.Item>
             <Form.Item
               name="username"
               rules={[
                 {
                   required: true,
-                  message: "Please input your Username!"
+                  message: trans("auth.err_missing_username")
                 }
               ]}
             >
-              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder={trans("auth.username")} />
             </Form.Item>
             <Form.Item
               name="password"
               rules={[
                 {
                   required: true,
-                  message: "Please input your Password!"
+                  message: trans("auth.err_missing_password")
                 }
               ]}
             >
               <Input
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
-                placeholder="Password"
+                placeholder={trans("auth.password")}
               />
             </Form.Item>
             <Form.Item
@@ -135,14 +135,14 @@ function Login () {
               rules={[
                 {
                   required: true,
-                  message: "Please confirm your password!"
+                  message: trans("auth.err_confirm_password")
                 },
                 ({ getFieldValue }) => ({
                   validator (rule, value) {
                     if (!value || getFieldValue("password") === value) {
                       return Promise.resolve();
                     }
-                    return Promise.reject(Error("The two passwords that you entered do not match!"));
+                    return Promise.reject(Error(trans("auth.err_match_password_confirm")));
                   }
                 })
               ]}
@@ -150,25 +150,24 @@ function Login () {
               <Input
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
-                placeholder="Confirm Password"
+                placeholder={trans("auth.confirm_password")}
               />
             </Form.Item>
             <Form.Item
               name="agreement"
               valuePropName="checked"
               rules={[
-                { validator: (_, value) => (value ? Promise.resolve() : Promise.reject(Error("Should accept agreement"))) }
+                { validator: (_, value) => (value ? Promise.resolve() : Promise.reject(Error(trans("auth.err_agree")))) }
               ]}
             >
               <Checkbox>
-                  I have read and accept the
-                {" "}
-                <Link to="/Legal">Terms and Conditions</Link>
+                {trans("auth.accept_agreement_start") + " "}
+                <Link to="/Legal">{trans("auth.terms_conditions")}</Link>
               </Checkbox>
             </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit" className="login-form-button">
-                  Register
+                {trans("auth.register")}
               </Button>
             </Form.Item>
           </Form>

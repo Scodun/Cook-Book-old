@@ -15,7 +15,7 @@ class IngredientInputList extends React.Component {
                     {...field}
                     name={[field.name, "amount"]}
                     fieldKey={[field.fieldKey, "amount"]}
-                    rules={[{ required: true, message: "Fehlende Anzahl" }]}
+                    rules={[{ required: true, message: trans("crud.missing_amount") }]}
                   >
                     <Input placeholder="Anzahl" />
                   </Form.Item>
@@ -23,7 +23,7 @@ class IngredientInputList extends React.Component {
                     {...field}
                     name={[field.name, "unit"]}
                     fieldKey={[field.fieldKey, "unit"]}
-                    rules={[{ required: true, message: "Fehlende Einheit" }]}
+                    rules={[{ required: true, message: trans("crud.missing_unit") }]}
                   >
                     <Input placeholder="Einheit"/>
                   </Form.Item>
@@ -31,9 +31,9 @@ class IngredientInputList extends React.Component {
                     {...field}
                     name={[field.name, "ingredient"]}
                     fieldKey={[field.fieldKey, "ingredient"]}
-                    rules={[{ required: true, message: "Fehlende Zutat" }]}
+                    rules={[{ required: true, message: trans("crud.missing_ingredient") }]}
                   >
-                    <Input placeholder="Zutat"/>
+                    <Input placeholder={trans("crud.ingredient")}/>
                   </Form.Item>
 
                   <MinusCircleOutlined
@@ -51,7 +51,7 @@ class IngredientInputList extends React.Component {
                     add();
                   }}
                 >
-                  <PlusOutlined /> Add Ingredient
+                  <PlusOutlined /> {trans("crud.add_ingredient")}
                 </Button>
               </Form.Item>
             </div>

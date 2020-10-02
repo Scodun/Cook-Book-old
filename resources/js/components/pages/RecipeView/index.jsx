@@ -20,7 +20,7 @@ class RecipeView extends Component {
   render () {
     return (
       <div className="">
-        <h1>Rezepte</h1>
+        <h1>{trans("crud.recipes")}</h1>
         {this.state.recipes.map((recipe, i) => {
           console.log("Entered");
           // Return the element. Also pass key
