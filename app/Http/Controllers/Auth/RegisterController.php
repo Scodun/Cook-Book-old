@@ -64,6 +64,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if((User::query()->Where(function ($query) use($data){
+            $query->where("email","like",$data['email'])
+                ->orWhere("username","like",$data['username']);
+    })->exists())){
+            return response()->json(['message' => trans("auth.err_reg")], 500);
+        }
         return User::create([
             'username' => $data['username'],
             'email' => $data['email'],

@@ -16,5 +16,9 @@ return [
     'username'=>"Username",
     'password'=>"Password",
     'email'=> "Email",
-    'confirm_password'=>'Confirm Password'
+    'confirm_password'=>'Confirm Password',
+    'suc_register' => 'Successfully created account!',
+    'error' => 'Error!',
+    'err_reg'=> 'This username or e-mail address is already in use.',
+    'err_pass_length'=>'The password has to be at least 8 characters long!'
 ];
