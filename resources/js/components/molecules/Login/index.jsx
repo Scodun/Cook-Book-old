@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  Card, Form, Input, Button, Checkbox, Tabs
+  Card, Form, Input, Button, Checkbox, Tabs, notification
 } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Link, useHistory } from "react-router-dom";
@@ -11,6 +11,7 @@ import { axios } from "../../atoms";
 const { TabPane } = Tabs;
 
 function Login () {
+  const [selectedTab, setSelectedTab] = useState("1");
   const history = useHistory();
   const onLoginFinish = function (values) {
     // eslint-disable-next-line no-undef
@@ -20,19 +21,33 @@ function Login () {
       Cookies.set("access_token", res.data.access_token, { expires: inOneHour });
 
       history.push("/home");
+    }).catch(() => {
+      notification.error({
+        message: trans("auth.err_login")
+      });
     });
   };
 
   const onRegFinish = function (values) {
     // eslint-disable-next-line no-undef
     axios.post("/api/auth/register", values, { headers: { "X-CSRF-TOKEN": csrf_token } }).then(res => {
-
+      setSelectedTab("1");
+      notification.success({
+        message: trans("auth.suc_register")
+      });
+    }).catch((error) => {
+      notification.error({
+        message: error.message
+      });
     });
+  };
+  const changeTab = activeKey => {
+    setSelectedTab(activeKey);
   };
 
   return (
     <Card>
-      <Tabs defaultActiveKey="1">
+      <Tabs defaultActiveKey="1" activeKey={selectedTab} onChange={changeTab}>
         <TabPane tab="Login" key="1">
           <Form
             name="normal_login"
@@ -84,6 +99,7 @@ function Login () {
         </TabPane>
         <TabPane tab="Register" key="2">
           <Form
+            id="register-form"
             name="normal_login"
             className="register-form"
             initialValues={{
@@ -97,7 +113,8 @@ function Login () {
                 {
                   required: true,
                   message: trans("auth.err_missing_email")
-                }
+                },
+                { type: "email" }
               ]}
             >
               <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder={trans("auth.email")} />
@@ -119,6 +136,10 @@ function Login () {
                 {
                   required: true,
                   message: trans("auth.err_missing_password")
+                },
+                {
+                  min: 8,
+                  message: trans("auth.err_pass_length")
                 }
               ]}
             >

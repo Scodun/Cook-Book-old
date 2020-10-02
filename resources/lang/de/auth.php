@@ -17,5 +17,9 @@ return [
     'username'=>"Benutzername",
     'password'=>"Passwort",
     'email'=> "Email",
-    'confirm_password'=>'Bestätige Passwort'
+    'confirm_password'=>'Bestätige Passwort',
+    'suc_register' => 'Account erfolgreich erstellt!',
+    'error' => 'Fehler!',
+    'err_reg'=> 'Es existiert bereits ein Benutzer unter diesem Benutzernamen oder E-Mail.',
+    'err_pass_length' => 'Das Passwort muss mindestens 8 Zeichen lang sein!'
 ];

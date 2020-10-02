@@ -26,7 +26,7 @@ class Home extends Component {
         <div className="home">
           <section className="mainContainer">
             <div className="welcome">
-              <h1>{trans("welcome.welcome") + " " + this.state.user ? this.state.user.username : ""}!</h1>
+              <h1>{trans("welcome.welcome") + " " + (this.state.user ? this.state.user.username : "")}!</h1>
               <div className="tip-container">
                 <Card style={{ width: "20rem", margin: "1rem" }}
                   actions={[
