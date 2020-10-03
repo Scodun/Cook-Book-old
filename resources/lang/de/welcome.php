@@ -14,6 +14,6 @@ return [
     */
 
     'description' => 'Cook Book ist eine Oberfläche auf der Kochbegeisterte ihre Rezepte speichern und teilen können!',
-    'welcome'=>"Willkommen!"
+    'welcome'=>"Willkommen"
 
 ];

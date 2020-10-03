@@ -1,201 +1,215 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Card, Form, Input, Button, Checkbox, Tabs, notification
 } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
-import { Link, useHistory } from "react-router-dom";
+import { Link,withRouter } from "react-router-dom";
+import { inject, observer } from "mobx-react";
 
-import Cookies from "js-cookie";
-import { axios } from "../../atoms";
 
 const { TabPane } = Tabs;
 
-function Login () {
-  const [selectedTab, setSelectedTab] = useState("1");
-  const history = useHistory();
-  const onLoginFinish = function (values) {
-    // eslint-disable-next-line no-undef
-    axios.post("/api/auth/login", values, { headers: { "X-CSRF-TOKEN": csrf_token, "Content-Type": "application/json" } }).then(res => {
-      const expires = (res.data.expires_at || 60 * 60) * 1000;
-      const inOneHour = new Date(new Date().getTime() + expires);
-      Cookies.set("access_token", res.data.access_token, { expires: inOneHour });
+@inject("authStore")
+@observer
+class Login extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      selectedTab: "1"
+    };
+    this.changeTab = this.changeTab.bind(this);
+    this.onRegFinish = this.onRegFinish.bind(this);
+    this.onLoginFinish = this.onLoginFinish.bind(this);
+  }
 
-      history.push("/home");
-    }).catch(() => {
+  async onLoginFinish (values) {
+    try {
+      await this.props.authStore.login(values);
+      this.props.history.push("/home");
+    } catch (e) {
       notification.error({
         message: trans("auth.err_login")
       });
-    });
+    }
   };
 
-  const onRegFinish = function (values) {
-    // eslint-disable-next-line no-undef
-    axios.post("/api/auth/register", values, { headers: { "X-CSRF-TOKEN": csrf_token } }).then(res => {
-      setSelectedTab("1");
+  setStateAsync (state) {
+    return new Promise((resolve) => {
+      this.setState(state, resolve);
+    });
+  }
+
+  async onRegFinish (values) {
+    try {
+      await this.props.authStore.register(values);
+      await this.setStateAsync({ selectedTab: "1" });
       notification.success({
         message: trans("auth.suc_register")
       });
-    }).catch((error) => {
+    } catch (error) {
       notification.error({
         message: error.message
       });
-    });
-  };
-  const changeTab = activeKey => {
-    setSelectedTab(activeKey);
+    }
   };
 
-  return (
-    <Card>
-      <Tabs defaultActiveKey="1" activeKey={selectedTab} onChange={changeTab}>
-        <TabPane tab="Login" key="1">
-          <Form
-            name="normal_login"
-            className="login-form"
-            initialValues={{
-              remember: true
-            }}
-            onFinish={onLoginFinish.bind(this)}
-          >
-            <Form.Item
-              name="username"
-              rules={[
-                {
-                  required: true,
-                  message: trans("auth.err_missing_username")
-                }
-              ]}
-            >
-              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder={trans("auth.username")} />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: trans("auth.err_missing_password")
-                }
-              ]}
-            >
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder={trans("auth.password")}
-              />
-            </Form.Item>
-            <Form.Item>
-              <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>{trans("auth.remember_me")}</Checkbox>
-              </Form.Item>
-              <Link to="/PasswordReset">{trans("auth.forgot_password")}</Link>
-            </Form.Item>
+  changeTab (activeKey) {
+    this.setState({ selectedTab: activeKey });
+  };
 
-            <Form.Item>
-              <Button type="primary" htmlType="submit" className="login-form-button">
-                {trans("auth.login")}
-              </Button>
-            </Form.Item>
-          </Form>
-        </TabPane>
-        <TabPane tab="Register" key="2">
-          <Form
-            id="register-form"
-            name="normal_login"
-            className="register-form"
-            initialValues={{
-              remember: true
-            }}
-            onFinish={onRegFinish}
-          >
-            <Form.Item
-              name="email"
-              rules={[
-                {
-                  required: true,
-                  message: trans("auth.err_missing_email")
-                },
-                { type: "email" }
-              ]}
+  render () {
+    return (
+      <Card>
+        <Tabs defaultActiveKey="1" activeKey={this.state.selectedTab} onChange={this.changeTab}>
+          <TabPane tab="Login" key="1">
+            <Form
+              name="normal_login"
+              className="login-form"
+              initialValues={{
+                remember: true
+              }}
+              onFinish={this.onLoginFinish.bind(this)}
             >
-              <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder={trans("auth.email")} />
-            </Form.Item>
-            <Form.Item
-              name="username"
-              rules={[
-                {
-                  required: true,
-                  message: trans("auth.err_missing_username")
-                }
-              ]}
-            >
-              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder={trans("auth.username")} />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: trans("auth.err_missing_password")
-                },
-                {
-                  min: 8,
-                  message: trans("auth.err_pass_length")
-                }
-              ]}
-            >
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder={trans("auth.password")}
-              />
-            </Form.Item>
-            <Form.Item
-              name="confirm"
-              dependencies={["password"]}
-              hasFeedback
-              rules={[
-                {
-                  required: true,
-                  message: trans("auth.err_confirm_password")
-                },
-                ({ getFieldValue }) => ({
-                  validator (rule, value) {
-                    if (!value || getFieldValue("password") === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(Error(trans("auth.err_match_password_confirm")));
+              <Form.Item
+                name="username"
+                rules={[
+                  {
+                    required: true,
+                    message: trans("auth.err_missing_username")
                   }
-                })
-              ]}
+                ]}
+              >
+                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder={trans("auth.username")} />
+              </Form.Item>
+              <Form.Item
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: trans("auth.err_missing_password")
+                  }
+                ]}
+              >
+                <Input
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder={trans("auth.password")}
+                />
+              </Form.Item>
+              <Form.Item>
+                <Form.Item name="remember" valuePropName="checked" noStyle>
+                  <Checkbox>{trans("auth.remember_me")}</Checkbox>
+                </Form.Item>
+                <Link to="/PasswordReset">{trans("auth.forgot_password")}</Link>
+              </Form.Item>
+
+              <Form.Item>
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                  {trans("auth.login")}
+                </Button>
+              </Form.Item>
+            </Form>
+          </TabPane>
+          <TabPane tab="Register" key="2">
+            <Form
+              id="register-form"
+              name="normal_login"
+              className="register-form"
+              initialValues={{
+                remember: true
+              }}
+              onFinish={this.onRegFinish}
             >
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder={trans("auth.confirm_password")}
-              />
-            </Form.Item>
-            <Form.Item
-              name="agreement"
-              valuePropName="checked"
-              rules={[
-                { validator: (_, value) => (value ? Promise.resolve() : Promise.reject(Error(trans("auth.err_agree")))) }
-              ]}
-            >
-              <Checkbox>
-                {trans("auth.accept_agreement_start") + " "}
-                <Link to="/Legal">{trans("auth.terms_conditions")}</Link>
-              </Checkbox>
-            </Form.Item>
-            <Form.Item>
-              <Button type="primary" htmlType="submit" className="login-form-button">
-                {trans("auth.register")}
-              </Button>
-            </Form.Item>
-          </Form>
-        </TabPane>
-      </Tabs>
-    </Card>
-  );
+              <Form.Item
+                name="email"
+                rules={[
+                  {
+                    required: true,
+                    message: trans("auth.err_missing_email")
+                  },
+                  { type: "email" }
+                ]}
+              >
+                <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder={trans("auth.email")} />
+              </Form.Item>
+              <Form.Item
+                name="username"
+                rules={[
+                  {
+                    required: true,
+                    message: trans("auth.err_missing_username")
+                  }
+                ]}
+              >
+                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder={trans("auth.username")} />
+              </Form.Item>
+              <Form.Item
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: trans("auth.err_missing_password")
+                  },
+                  {
+                    min: 8,
+                    message: trans("auth.err_pass_length")
+                  }
+                ]}
+              >
+                <Input
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder={trans("auth.password")}
+                />
+              </Form.Item>
+              <Form.Item
+                name="confirm"
+                dependencies={["password"]}
+                hasFeedback
+                rules={[
+                  {
+                    required: true,
+                    message: trans("auth.err_confirm_password")
+                  },
+                  ({ getFieldValue }) => ({
+                    validator (rule, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(Error(trans("auth.err_match_password_confirm")));
+                    }
+                  })
+                ]}
+              >
+                <Input
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder={trans("auth.confirm_password")}
+                />
+              </Form.Item>
+              <Form.Item
+                name="agreement"
+                valuePropName="checked"
+                rules={[
+                  { validator: (_, value) => (value ? Promise.resolve() : Promise.reject(Error(trans("auth.err_agree")))) }
+                ]}
+              >
+                <Checkbox>
+                  {trans("auth.accept_agreement_start") + " "}
+                  <Link to="/Legal">{trans("auth.terms_conditions")}</Link>
+                </Checkbox>
+              </Form.Item>
+              <Form.Item>
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                  {trans("auth.register")}
+                </Button>
+              </Form.Item>
+            </Form>
+          </TabPane>
+        </Tabs>
+      </Card>
+    );
+  }
 }
 
-export default Login;
+export default withRouter(Login);
