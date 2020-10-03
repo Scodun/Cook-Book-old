@@ -1,20 +1,14 @@
 import React, { Component } from "react";
 import { Card, Avatar } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
-import { getUser } from "../../atoms/AuthenticatedRoute";
+import { inject, observer } from "mobx-react";
 const { Meta } = Card;
 
+@inject("authStore")
+@observer
 class Home extends Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      user: null
-    };
-  }
-
-  componentDidMount () {
-    getUser()
-      .then(user => this.setState({ user: user.data }));
+  async componentDidMount () {
+    await this.props.authStore.fetchCurrentUser();
   }
 
     handleAddRecipeClick = e => {
@@ -22,11 +16,12 @@ class Home extends Component {
     };
 
     render () {
+      const { user } = this.props.authStore;
       return (
         <div className="home">
           <section className="mainContainer">
             <div className="welcome">
-              <h1>{trans("welcome.welcome") + " " + (this.state.user ? this.state.user.username : "")}!</h1>
+              <h1>{trans("welcome.welcome") + " " + user?.username}!</h1>
               <div className="tip-container">
                 <Card style={{ width: "20rem", margin: "1rem" }}
                   actions={[

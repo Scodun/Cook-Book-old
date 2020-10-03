@@ -14,5 +14,5 @@ return [
     */
 
     'description' => 'Cook Book is a website where cooking enthusiasts can save and share their recipes!',
-    'welcome'=>"Welcome!"
+    'welcome'=>"Welcome"
 ];
